@@ -1,0 +1,1 @@
+web: gunicorn encantos_mei.wsgi:application
