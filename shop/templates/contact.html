@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Encantos Mei - Contacto
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center my-4">
+        Contacto
+    </h1>
+    <div class="container" style="display: flex; flex-direction: column;">
+    
+        <div class="alert alert-success" style="display: none;" id="alert-message">
+
+        {% if message %}
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const alertDiv = document.getElementById('alert-message');
+                    alertDiv.innerHTML = "{{ message }}";
+                    alertDiv.style.display = 'block';
+                });
+            </script>
+        {% endif %}
+
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {% if not user.is_authenticated %}
+                {{ form.name.label }} {{ form.name }}
+            {% endif %}
+            {{ form.email.label }} {{ form.email }}
+            {{ form.message.label }} {{ form.message }}
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+{% endblock %}

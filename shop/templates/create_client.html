@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Encantos Mei | Crear Cliente
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center" style="margin-top: 50px; margin-bottom: 50px;">
+        Crear Cliente
+    </h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                <input type="{{ field.field.widget.input_type }}" id="{{ field.id_for_label }}" name="{{ field.name }}" class="form-control" required="{{ field.field.required }}" value="{{ field.value|default_if_none:'' }}">
+                {% if field.help_text %}
+                    <small class="form-text text-muted">
+                        {{ field.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                Crear Cliente
+            </button>
+        </div>
+    </form>
+    
+    <p class="text-center">
+        <a href="{% url 'clients' %}" class="btn btn-secondary">Cancelar</a>
+    </p>
+{% endblock %}

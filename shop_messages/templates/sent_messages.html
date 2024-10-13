@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Mensajes enviados - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">
+        Mensajes enviados
+    </h1>
+    <a href="{% url 'send_message' %}" class="btn btn-primary">
+        Enviar nuevo mensaje
+    </a>
+    <a href="{% url 'messages' %}" class="btn btn-primary">
+        Volver a Mensajes
+    </a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Destinatario
+                </th>
+                <th>
+                    Contenido
+                </th>
+                <th>
+                    Fecha de envío
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in messages %}
+                <tr>
+                    <td>
+                        {{ message.recipient.username }}
+                    </td>
+                    <td>
+                        {{ message.content }}
+                    </td>
+                    <td>
+                        {{ message.sent_date }}
+                    </td>
+                </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">
+                    No tiene mensajes enviados
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Editar Servicio - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">
+        Editar Servicio: {{ service.name }}
+    </h1>
+    <form method="POST" action="{% url 'edit_service' service.pk %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_name">Nombre del Servicio:</label>
+            <input type="text" id="id_name" name="name" value="{{ form.name.value }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_description">Descripción:</label>
+            <textarea id="id_description" name="description" required>{{ form.description.value }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="id_price">Precio:</label>
+            <input type="text" id="id_price" name="price" value="{{ form.price.value|default:service.price }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_duration">Duración (minutos):</label>
+            <input type="text" id="id_duration" name="duration" value="{{ form.duration.value }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_image">Imagen:</label>
+            {% if service.image %}
+                Actualmente: 
+                <a href="{{ service.image.url }}">{{ service.image.url }}</a><br>
+                <input type="checkbox" name="image-clear" id="image-clear_id">
+                <label for="image-clear_id">Eliminar imagen actual</label><br>
+            {% endif %}
+            Modificar: <input type="file" name="image" accept="image/*" id="id_image">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Actualizar Servicio">
+        </div>
+    </form>
+
+    <a href="{% url 'services' %}" class="btn">Volver a Servicios</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear Producto - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">Crear Nuevo Producto</h1>
+    
+    <form method="POST" action="{% url 'create_product' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">Nombre del Producto:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="price">Precio:</label>
+            <input type="text" id="price" name="price" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="stock">Cantidad en Stock:</label>
+            <input type="number" id="stock" name="stock" required min="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="image">Imagen:</label>
+            <input type="file" id="image" name="image">
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Agregar Producto">
+        </div>
+    </form>
+    
+
+    <a href="{% url 'products' %}" class="btn">Volver a Productos</a>
+{% endblock %}

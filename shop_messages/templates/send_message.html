@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Enviar mensaje - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">
+        Enviar mensaje
+    </h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">
+            Enviar
+        </button>
+    </form>
+    <a href="{% url 'sent_messages' %}" class="btn btn-secondary">
+        Cancelar
+    </a>
+{% endblock %}

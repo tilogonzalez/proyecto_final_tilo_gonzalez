@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Servicios - Encantos Mei
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center my-4">
+    Nuestros servicios
+</h1>
+    {% if user.is_authenticated %}
+        {% if is_admin %}
+            <a href="{% url 'create_service' %}" class="btn btn-primary">
+                Agregar Servicio
+            </a>
+        {% endif %}
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            {% for service in services %}
+                <div class="col-md-3 mb-4">
+                    <a href="{% url 'service_detail' service.pk %}" class="card text-decoration-none text-dark">
+                        {% if service.image %}
+                            <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ service.name }}
+                            </h5>
+                            <p class="card-text"><strong>
+                                Precio: ${{ service.price }}
+                            </strong></p>
+                        </div>
+                    </a>
+
+                    {% if is_admin %}
+                        <a href="{% url 'edit_service' service.pk %}" class="btn btn-warning">
+                            Editar
+                        </a>
+                        <form method="POST" class="form-products" action="{% url 'delete_service' service.pk %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás segura de que deseas eliminar este servicio?');">
+                                Eliminar
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

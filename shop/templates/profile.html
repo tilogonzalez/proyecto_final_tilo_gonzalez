@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Perfil - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center my-4">
+        Perfil de {{ profile.user.username }}
+    </h1>
+    <p>
+        Email: {{ profile.user.email }}
+    </p>
+    <p>
+        Dirección: {{ profile.address }}
+    </p>
+    <p>
+        Número de Teléfono: {{ profile.phone_number }}
+    </p>
+    {% if profile.profile_picture %}
+        <img src="{{ profile.profile_picture.url }}" alt="Imagen de perfil" width="150" height="150">
+    {% endif %}
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">
+        Editar Perfil
+    </a>
+{% endblock %}

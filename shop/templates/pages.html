@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Mapa del Sitio
+{% endblock %}
+
+{% block content %}
+    <div class="container my-4" style="display: flex; flex-direction: column;">
+        <h1 class="text-center my-4">Mapa del Sitio</h1>
+
+        <h1 class="text-center my-4" style="font-size: 30px;">Enlaces Principales</h1>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="{% url 'index' %}" class="text-dark">Inicio</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'products' %}" class="text-dark">Productos</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'services' %}" class="text-dark">Servicios</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'about' %}" class="text-dark">Acerca de</a>
+            </li>
+            <li class="list-group-item">
+                <a href="{% url 'contact' %}" class="text-dark">Contacto</a>
+            </li>
+        </ul>
+
+        <h1 class="text-center my-4" style="font-size: 30px;">Productos</h1>
+        {% if products %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>${{ product.price }}</td>
+                            <td>
+                                <a href="{% url 'product_detail' product.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay productos disponibles.</p>
+        {% endif %}
+
+        <h1 class="text-center my-4" style="font-size: 30px;">Servicios</h1>
+        {% if services %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                        <tr>
+                            <td>{{ service.name }}</td>
+                            <td>${{ service.price }}</td>
+                            <td>
+                                <a href="{% url 'service_detail' service.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay servicios disponibles.</p>
+        {% endif %}
+    </div>
+{% endblock %}

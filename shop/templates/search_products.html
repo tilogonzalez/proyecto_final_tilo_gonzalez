@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Buscar Productos
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center my-4">
+        Resultados de la Búsqueda
+    </h1>
+    <div class="container">
+        <div class="row">
+            {% if results %}
+                {% for product in results %}
+                    <div class="col-md-3 mb-4">
+                        <a href="{% url 'product_detail' product.id %}" class="card text-decoration-none text-dark">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ product.name }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ product.brand }}
+                                </p>
+                                <p class="card-text">
+                                    <strong>
+                                        Precio: {{ product.price }}
+                                    </strong>
+                                </p>
+                            </div>
+                        </a>
+                        {% if is_admin %}
+                        <div class="card-body">
+                            <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">
+                                Editar
+                            </a>
+                            <form method="POST" class="form-products" action="{% url 'delete_product' product.pk %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">
+                    No se encontraron productos.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

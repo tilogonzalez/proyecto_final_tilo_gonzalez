@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Editar Perfil - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">Editar Perfil</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="{{ form.email.id_for_label }}">Correo electrónico</label>
+            {{ form.email }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+            {{ form.address }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+            {{ form.phone_number }}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.profile_picture.id_for_label }}">{{ form.profile_picture.label }}</label>
+            {{ form.profile_picture }}
+        </div>
+        <div class="mb-3">
+        <button type="submit" class="btn">
+            Actualizar
+        </button>
+        </div>
+    </form>
+{% endblock %}

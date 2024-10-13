@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Encantos Mei | Clientes
+{% endblock %}
+
+{% block content %}
+    <h1 class="text-center my-4">Nuestros Clientes</h1>
+
+    {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+        {% if is_admin %}
+            <a href="{% url 'create_client' %}" class="btn btn-primary mb-3">
+                Agregar Cliente
+            </a>
+        {% endif %}
+    {% endif %}
+
+    <div class="container">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Nombre de Usuario</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    {% if is_admin %}
+                    <th>Acciones</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.user.username }}</td>
+                        <td>{{ client.user.email }}</td>
+                        <td>{{ client.phone_number }}</td>
+                        <td>{{ client.address }}</td>
+                        {% if is_admin %}
+                        <td>
+                            <a href="{% url 'edit_client' client.pk %}" class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+                            <form method="POST" action="{% url 'delete_client' client.pk %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás segura de que deseas eliminar este cliente?');">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height: 50px;"></div>
+{% endblock %}

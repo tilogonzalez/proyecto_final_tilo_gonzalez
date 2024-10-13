@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ product.name }} - Encantos Mei
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+            {% else %}
+                <p>No hay imagen disponible.</p>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h1>{{ product.name }}</h1>
+            <p class="lead">{{ product.description }}</p>
+            <p class="h4 text-danger">Precio: ${{ product.price }}</p>
+            <p class="h5">Stock disponible: {{ product.stock }}</p>
+            <a href="{% url 'products' %}" class="btn btn-secondary">Volver a Productos</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

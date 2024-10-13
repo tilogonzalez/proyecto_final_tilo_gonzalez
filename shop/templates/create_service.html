@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear Servicio - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">
+        Crear Nuevo Servicio
+    </h1>
+    <form method="POST" action="{% url 'create_service' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">Nombre del Servicio:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Descripción:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="price">Precio:</label>
+            <input type="text" id="price" name="price" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="duration">Duración (minutos):</label>
+            <input type="number" id="duration" name="duration" required>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Agregar Servicio">
+        </div>
+    </form>
+
+    <a href="{% url 'services' %}" class="btn">
+        Volver a Servicios
+    </a>
+{% endblock %}

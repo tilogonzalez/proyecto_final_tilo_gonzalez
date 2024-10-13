@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Editar Producto - Encantos Mei
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 50px; margin-bottom: 50px;">
+        Editar Producto: {{ product.name }}
+    </h1>
+    <form method="POST" action="{% url 'edit_product' product.pk %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_name">Nombre del Producto:</label>
+            <input type="text" id="id_name" name="name" value="{{ form.name.value }}" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="id_brand">Marca:</label>
+            <input type="text" id="id_brand" name="brand" value="{{ form.brand.value }}" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="id_description">Descripción:</label>
+            <textarea id="id_description" name="description" required>{{ form.description.value }}</textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="id_price">Precio:</label>
+            <input type="text" id="id_price" name="price" value="{{ form.price.value }}" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="id_stock">Cantidad en stock:</label>
+            <input type="number" id="id_stock" name="stock" value="{{ form.stock.value }}" required>
+        </div>
+    
+        <div class="form-group">
+            <label for="id_image">Imagen:</label>
+            Actualmente: <a href="{{ product.image.url }}">{{ product.image.url }}</a><br>
+            <input type="checkbox" name="image-clear" id="image-clear_id">
+            <label for="image-clear_id">Eliminar imagen actual</label><br>
+            Modificar: <input type="file" name="image" accept="image/*" id="id_image">
+        </div>
+    
+        <div class="form-group">
+            <input type="submit" value="Actualizar Producto">
+        </div>
+    </form>
+    
+    <a href="{% url 'products' %}" class="btn">
+        Volver a Productos
+    </a>
+{% endblock %}
