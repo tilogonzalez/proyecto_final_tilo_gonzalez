@@ -38,6 +38,10 @@ En el navegador ingresar a 127.0.0.1:8000
 
 https://youtu.be/MmN_N5KqscI
 
+## Casos de prueba:
+
+https://docs.google.com/spreadsheets/d/1lcaSxf5VSIg92599XqWOhZk1DXTz61pfkqb75PlGeEk/edit?usp=sharing
+
 ## Autor
 
 - [@tilogonzalez](https://github.com/tilogonzalez)
