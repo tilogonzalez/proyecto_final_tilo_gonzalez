@@ -129,3 +129,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'shop/static/media')
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://encantosmei.up.railway.app',
+]
